@@ -17,5 +17,4 @@ public class InputUsuario {
 
         return numElegido;
     }
-
 }
