@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class InputUsuario {
     private Scanner leer = new Scanner(System.in);
-    private Tablero t = IniciarJuego.t;
+    private Tablero t = IniciarJuego.tablero;
     private int numMinimo = 1;
 
     public int EleccionCasilla(){
