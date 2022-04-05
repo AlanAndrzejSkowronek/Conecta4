@@ -1,12 +1,11 @@
 public class IniciarJuego {
-    public static Tablero tablero = new Tablero(7, 7);
 
     public static void main(String[] args){
-        InputUsuario inpus = new InputUsuario();
+        Partida p = new Partida();
 
-        // Testeos temporales
-        tablero.initTablero();
-        tablero.printTablero();
-        inpus.EleccionCasilla();
+        System.out.println("Bienvenido al Conecta 4!");
+        System.out.println("Conectad 4 piezas en vertical, horizontal o diagonal para ganar!");
+        System.out.println("Suerte jugadores! Que comience el juego: ");
+        p.ejecutarPartida();
     }
 }
