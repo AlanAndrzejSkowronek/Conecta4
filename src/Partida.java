@@ -68,46 +68,37 @@ public class Partida {
 
     private boolean comprobarCasillaHorizontal(int contGanador, char posibleGanador){
 
-        for(int i = lastColumna; i < t.getLongitud() - 1; i++){
-            if (posibleGanador == t.getFicha(lastAlt, i + 1)){
+        int colMin = ((lastColumna - 3) < 0) ? 0 : lastColumna - 3;
+        int colMax = ((lastColumna + 3) >= (t.getLongitud() - 1)) ? (t.getLongitud() - 1) : lastColumna + 3;
+
+        for(int i = colMin; i <= colMax - 1; i++){
+            if (t.getFicha(lastAlt, i) == t.getFicha(lastAlt, i + 1)){
                 contGanador++;
             } else {
-                break;
+                contGanador = 1;
             }
-        }
-        for(int j = lastColumna; j > 1; j--){
-            if (posibleGanador == t.getFicha(lastAlt, j - 1)){
-                contGanador++;
-            } else {
-                break;
+            if (contGanador == 4){
+                return true;
             }
         }
 
-        if (contGanador == 4){
-            return true;
-        }
         return false;
     }
 
     private boolean comprobarCasillaVertical(int contGanador, char posibleGanador){
 
-        for(int i = lastAlt; i < t.getAltura() - 1; i++){
-            if (posibleGanador == t.getFicha(i + 1, lastColumna)){
-                contGanador++;
-            } else {
-                break;
-            }
-        }
-        for(int j = lastAlt; j > 1; j--){
-            if (posibleGanador == t.getFicha(j - 1, lastColumna)){
-                contGanador++;
-            } else {
-                break;
-            }
-        }
+        int altMin = ((lastAlt - 3) < 0) ? 0 : lastAlt - 3;
+        int altMax = ((lastAlt + 3) >= (t.getAltura() - 1)) ? (t.getAltura() - 1) : lastAlt + 3;
 
-        if (contGanador == 4){
-            return true;
+        for(int i = altMin; i <= altMax - 1; i++){
+            if (t.getFicha(i, lastColumna) == t.getFicha(i + 1, lastColumna)){
+                contGanador++;
+            } else {
+                contGanador = 1;
+            }
+            if (contGanador == 4){
+                return true;
+            }
         }
         return false;
     }
