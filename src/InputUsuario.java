@@ -1,4 +1,4 @@
-import java.util.InputMismatchException;
+// import java.util.InputMismatchException; Para luego
 import java.util.Scanner;
 
 public class InputUsuario {
@@ -10,7 +10,14 @@ public class InputUsuario {
         int numElegido = 0;
 
         do {
-
+            /*
+            try {
+                numElegido = leer.nextInt();
+            } catch (InputMismatchException e){
+                System.out.print("No has introducido un número. Porfavor, introduzca uno... ");
+            }
+            PARA LUEGO (No funciona).
+            */
             numElegido = leer.nextInt();
 
             if (numElegido > t.getAltura() || numElegido < numMinimo){

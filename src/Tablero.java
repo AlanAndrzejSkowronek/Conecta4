@@ -11,7 +11,6 @@ public class Tablero {
     public int getAltura(){ return altura; }
     public int getLongitud(){ return longitud; }
 
-
     public char getFicha(int alt, int lon){ return this.tablero[alt][lon]; }
     public void setFicha(int alt, int lon, char ficha){ this.tablero[alt][lon] = ficha; }
 
