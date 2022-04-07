@@ -54,10 +54,16 @@ public class Partida {
         int contadorGanador = 1;
         char posibleGanador = t.getFicha(lastAlt, lastColumna);
 
+        int colMin = ((lastColumna - 3) < 0) ? 0 : lastColumna - 3;
+        int colMax = ((lastColumna + 3) >= (t.getLongitud() - 1)) ? (t.getLongitud() - 1) : lastColumna + 3;
+
+        int altMin = ((lastAlt - 3) < 0) ? 0 : lastAlt - 3;
+        int altMax = ((lastAlt + 3) >= (t.getAltura() - 1)) ? (t.getAltura() - 1) : lastAlt + 3;
+
         if (
-            comprobarCasillaHorizontal(contadorGanador, posibleGanador)      ||
-            comprobarCasillaVertical(contadorGanador, posibleGanador)        ||
-            comprobarCasillaDiagonalDerecha(contadorGanador, posibleGanador) ||
+            comprobarCasillaHorizontal(contadorGanador, posibleGanador, colMin, colMax)                        ||
+            comprobarCasillaVertical(contadorGanador, posibleGanador, altMin, altMax)                          ||
+            comprobarCasillaDiagonalDerecha(contadorGanador, posibleGanador)   ||
             comprobarCasillaDiagonalIzquierda(contadorGanador, posibleGanador)
            ){
             return true;
@@ -66,10 +72,7 @@ public class Partida {
         return false;
     }
 
-    private boolean comprobarCasillaHorizontal(int contGanador, char posibleGanador){
-
-        int colMin = ((lastColumna - 3) < 0) ? 0 : lastColumna - 3;
-        int colMax = ((lastColumna + 3) >= (t.getLongitud() - 1)) ? (t.getLongitud() - 1) : lastColumna + 3;
+    private boolean comprobarCasillaHorizontal(int contGanador, char posibleGanador, int colMin, int colMax){
 
         for(int i = colMin; i <= colMax - 1; i++){
             if (t.getFicha(lastAlt, i) == t.getFicha(lastAlt, i + 1)){
@@ -77,18 +80,13 @@ public class Partida {
             } else {
                 contGanador = 1;
             }
-            if (contGanador == 4){
-                return true;
-            }
+            if (contGanador == 4){ return true; }
         }
 
         return false;
     }
 
-    private boolean comprobarCasillaVertical(int contGanador, char posibleGanador){
-
-        int altMin = ((lastAlt - 3) < 0) ? 0 : lastAlt - 3;
-        int altMax = ((lastAlt + 3) >= (t.getAltura() - 1)) ? (t.getAltura() - 1) : lastAlt + 3;
+    private boolean comprobarCasillaVertical(int contGanador, char posibleGanador, int altMin, int altMax){
 
         for(int i = altMin; i <= altMax - 1; i++){
             if (t.getFicha(i, lastColumna) == t.getFicha(i + 1, lastColumna)){
@@ -96,20 +94,13 @@ public class Partida {
             } else {
                 contGanador = 1;
             }
-            if (contGanador == 4){
-                return true;
-            }
+            if (contGanador == 4){ return true; }
         }
         return false;
     }
 
     private boolean comprobarCasillaDiagonalDerecha(int contGanador, char posibleGanador){
 
-
-
-        if (contGanador == 4){
-            return true;
-        }
         return false;
     }
 
@@ -117,4 +108,22 @@ public class Partida {
 
         return false;
     }
+
+    private boolean estaEnRango(int alt, int lon){
+
+        if (
+                alt < (t.getAltura() - 1)   ||
+                alt > 0                     ||
+                lon < (t.getLongitud() - 1) ||
+                lon > 0
+        )   { return true; }
+
+        return false;
+    }
+
+    private boolean compara(char fichaAComparar, int alt, int lon){
+        if (fichaAComparar == t.getFicha(alt, lon)){ return true; }
+        return false;
+    }
+
 }
