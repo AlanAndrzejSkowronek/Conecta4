@@ -70,7 +70,7 @@ public class Partida {
         int[] direccioHorizontalIzquierda = {0, -1};
 
         if (busqueda(direccioHorizontalIzquierda, lastAlt, lastColumna, contGanador) ||
-                busqueda(direccioHorizontalDerecha, lastAlt, lastColumna, contGanador))
+            busqueda(direccioHorizontalDerecha, lastAlt, lastColumna, contGanador))
         {
             return true;
         }
@@ -94,7 +94,7 @@ public class Partida {
         int[] direccioDiagonalIzquierdaAbajo = {-1, 1};
 
         if (busqueda(direccioDiagonalDerechaArriba, lastAlt, lastColumna, contGanador) ||
-                busqueda(direccioDiagonalIzquierdaAbajo, lastAlt, lastColumna, contGanador))
+            busqueda(direccioDiagonalIzquierdaAbajo, lastAlt, lastColumna, contGanador))
         {
             return true;
         }
