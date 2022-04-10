@@ -24,7 +24,7 @@ public class Partida {
                 break;
             }
 
-        } while(turno <= (t.getAltura() * t.getLongitud()));
+        } while(turno <= ((t.getAltura() * t.getLongitud()) - 1));
     }
 
     private boolean rellenarCasilla(char player){
@@ -50,7 +50,7 @@ public class Partida {
     }
 
     private boolean comprobarCasilla(){
-        int contadorGanador = 1;
+        int contadorGanador = 0;
         char posibleGanador = t.getFicha(lastAlt, lastColumna);
 
         if (
@@ -125,14 +125,15 @@ public class Partida {
     private boolean busqueda(int[] direccio, int alt, int lon, int contGanador){
 
         char ficha = t.getFicha(alt, lon);
-        alt += direccio[0];
-        lon += direccio[1];
 
-        while (estaEnRango(alt, lon) && compara(ficha, alt, lon)){
+        do {
+
             alt += direccio[0];
             lon += direccio[1];
             contGanador++;
-        }
+
+        } while (estaEnRango(alt, lon) && compara(ficha, alt, lon));
+
         alt -= direccio[0];
         lon -= direccio[1];
 
