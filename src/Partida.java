@@ -52,64 +52,14 @@ public class Partida {
     private boolean comprobarCasilla(){
         int contadorGanador = 0;
         char posibleGanador = t.getFicha(lastAlt, lastColumna);
+        int[] direcciones = {0, 1, 0, -1, 1, 0, -1, 0, 1, -1, -1, 1, 1, 1, -1, -1};
 
-        if (
-            comprobarCasillaHorizontal(contadorGanador)        ||
-            comprobarCasillaVertical(contadorGanador)          ||
-            comprobarCasillaDiagonalDerecha(contadorGanador)   ||
-            comprobarCasillaDiagonalIzquierda(contadorGanador)
-           ){
-            return true;
+        for (int i = 0; i < direcciones.length - 1; i++){
+            if (busqueda(direcciones[i], direcciones[i + 1], lastAlt, lastColumna, contadorGanador)){
+                return true;
+            }
         }
 
-        return false;
-    }
-
-    private boolean comprobarCasillaHorizontal(int contGanador){
-        int[] direccioHorizontalDerecha = {0, 1};
-        int[] direccioHorizontalIzquierda = {0, -1};
-
-        if (busqueda(direccioHorizontalIzquierda, lastAlt, lastColumna, contGanador) ||
-            busqueda(direccioHorizontalDerecha, lastAlt, lastColumna, contGanador))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean comprobarCasillaVertical(int contGanador){
-        int[] direccioVerticalDerecha = {1, 0};
-        int[] direccioVerticalIzquierda = {-1, 0};
-
-        if (busqueda(direccioVerticalIzquierda, lastAlt, lastColumna, contGanador) ||
-            busqueda(direccioVerticalDerecha, lastAlt, lastColumna, contGanador))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean comprobarCasillaDiagonalDerecha(int contGanador){
-        int[] direccioDiagonalDerechaArriba = {1, -1};
-        int[] direccioDiagonalIzquierdaAbajo = {-1, 1};
-
-        if (busqueda(direccioDiagonalDerechaArriba, lastAlt, lastColumna, contGanador) ||
-            busqueda(direccioDiagonalIzquierdaAbajo, lastAlt, lastColumna, contGanador))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean comprobarCasillaDiagonalIzquierda(int contGanador){
-        int[] direccioDiagonalIzquierdaArriba = {1, 1};
-        int[] direccioDiagonalDerechaAbajo = {-1, -1};
-
-        if (busqueda(direccioDiagonalIzquierdaArriba, lastAlt, lastColumna, contGanador) ||
-            busqueda(direccioDiagonalDerechaAbajo, lastAlt, lastColumna, contGanador))
-        {
-            return true;
-        }
         return false;
     }
 
@@ -122,20 +72,20 @@ public class Partida {
 
     private boolean compara(char fichaAComparar, int alt, int lon){ return fichaAComparar == t.getFicha(alt, lon); }
 
-    private boolean busqueda(int[] direccio, int alt, int lon, int contGanador){
+    private boolean busqueda(int direccioAltura, int direccioLongitud, int alt, int lon, int contGanador){
 
         char ficha = t.getFicha(alt, lon);
 
         do {
 
-            alt += direccio[0];
-            lon += direccio[1];
+            alt += direccioAltura;
+            lon += direccioLongitud;
             contGanador++;
 
         } while (estaEnRango(alt, lon) && compara(ficha, alt, lon));
 
-        alt -= direccio[0];
-        lon -= direccio[1];
+        alt -= direccioAltura;
+        lon -= direccioLongitud;
 
         if (contGanador == 4){
             return true;
